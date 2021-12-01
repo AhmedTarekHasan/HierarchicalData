@@ -37,45 +37,53 @@ namespace HierarchicalData.Implementations
 
         public void AddChild(INode child)
         {
-            child.Parent?.RemoveChild(child);
-
-            m_Catalog.Add(child.Id, child);
-            m_Children.Add(child);
-            ((Node)child).Parent = this;
-
-            OnDirectChildNodeAdded(child);
-
-            if (child.Type == NodeType.Structural && child is IStructuralNode structuralNode)
+            if (child != null && Children.All(c => c.Id != child.Id))
             {
-                foreach (var keyValuePair in structuralNode.GetFlatChildren())
+                child.Parent?.RemoveChild(child);
+
+                m_Catalog.Add(child.Id, child);
+                m_Children.Add(child);
+
+                OnDirectChildNodeAdded(child);
+
+                if (child.Type == NodeType.Structural && child is IStructuralNode structuralNode)
                 {
-                    m_Catalog.Add(keyValuePair.Key, keyValuePair.Value);
-                    OnNestedChildNodeAdded(keyValuePair.Value.Parent, keyValuePair.Value);
+                    foreach (var keyValuePair in structuralNode.GetFlatChildren())
+                    {
+                        m_Catalog.Add(keyValuePair.Key, keyValuePair.Value);
+                        OnNestedChildNodeAdded(keyValuePair.Value.Parent, keyValuePair.Value);
+                    }
+
+                    structuralNode.ChildNodeAdded += AddHandler;
+                    structuralNode.ChildNodeRemoved += RemoveHandler;
                 }
 
-                structuralNode.ChildNodeAdded += AddHandler;
-                structuralNode.ChildNodeRemoved += RemoveHandler;
+                child.Parent = this;
             }
         }
 
         public void RemoveChild(INode child)
         {
-            m_Catalog.Remove(child.Id);
-            m_Children.Remove(child);
-            ((Node)child).Parent = null;
-
-            OnDirectChildNodeRemoved(child);
-
-            if (child.Type == NodeType.Structural && child is IStructuralNode structuralNode)
+            if (child != null && Children.Any(c => c.Id == child.Id))
             {
-                foreach (var keyValuePair in structuralNode.GetFlatChildren())
+                m_Catalog.Remove(child.Id);
+                m_Children.Remove(child);
+
+                OnDirectChildNodeRemoved(child);
+
+                if (child.Type == NodeType.Structural && child is IStructuralNode structuralNode)
                 {
-                    m_Catalog.Remove(keyValuePair.Key);
-                    OnNestedChildNodeRemoved(keyValuePair.Value.Parent, keyValuePair.Value);
+                    foreach (var keyValuePair in structuralNode.GetFlatChildren())
+                    {
+                        m_Catalog.Remove(keyValuePair.Key);
+                        OnNestedChildNodeRemoved(keyValuePair.Value.Parent, keyValuePair.Value);
+                    }
+
+                    structuralNode.ChildNodeAdded -= AddHandler;
+                    structuralNode.ChildNodeRemoved -= RemoveHandler;
                 }
 
-                structuralNode.ChildNodeAdded -= AddHandler;
-                structuralNode.ChildNodeRemoved -= RemoveHandler;
+                child.Parent = null;
             }
         }
 

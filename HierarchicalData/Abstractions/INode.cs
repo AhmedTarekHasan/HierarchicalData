@@ -6,6 +6,6 @@
         string Name { get; }
         string PathPart { get; }
         NodeType Type { get; }
-        IStructuralNode Parent { get; }
+        IStructuralNode Parent { get; set; }
     }
 }
