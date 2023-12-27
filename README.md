@@ -1,10 +1,10 @@
-<link rel="canonical" href="https://levelup.gitconnected.com/hierarchical-tree-form-data-in-net-c-d2a868fcb756?sk=b8c5dcb24c6124bc566c260ad7d9afcd" />
+<link rel="canonical" href="https://www.developmentsimplyput.com/post/hierarchical-tree-form-data-structure-in-net-c" />
 
 # Hierarchical Tree Form Data Structure in .NET C#
 ### Design a data structure for Hierarchical Tree Form data and its related operations in .NET C#
 
 <p align="center">
-  <img src="https://miro.medium.com/max/2000/1*bOokbEeXpF1Z4gd_BpL93w.jpeg">
+  <img src="https://static.wixstatic.com/media/488a99_7903cc8b90164ba2863cb82ba3e800b0~mv2.png/v1/fill/w_828,h_552,al_c,q_90,enc_auto/488a99_7903cc8b90164ba2863cb82ba3e800b0~mv2.png">
 </p>
 
 <br/>
@@ -53,4 +53,4 @@ If you are interested into reading more about this topic, you can read [the rest
 [LinkedIn]: https://www.linkedin.com/in/atarekhasan/
 [Friend Links]: https://www.linkedin.com/feed/update/urn:li:activity:6866082670108143616/
 [Newsletter]: https://www.linkedin.com/newsletters/development-simply-put-6866647119655247872/
-[Article]: https://levelup.gitconnected.com/hierarchical-tree-form-data-in-net-c-d2a868fcb756?sk=b8c5dcb24c6124bc566c260ad7d9afcd
+[Article]: https://www.developmentsimplyput.com/post/hierarchical-tree-form-data-structure-in-net-c
